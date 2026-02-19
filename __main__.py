@@ -3,12 +3,12 @@ import os
 
 __author__ = 'Luis Carrillo Gutiérrez'
 __copyright__ = "Copyright 07/2020, Luis Carrillo Gutiérrez"
-__desc__ = 'Proof of Concept'
+__desc__ = 'Proof of Concept of Recipe Book'
 
 app = bottle.Bottle()
 
 DB = '/tmp/data.db'
-
+ROOT_DIR = os.path.abspath(os.path.dirname(__file__))
 MINIMAL_CORS = {
 	'Content-type':'application/json',
 	'Access-Control-Allow-Origin':'*',
@@ -24,7 +24,11 @@ def errore404(error):
 
 @app.route('/', method='GET')
 def ui():
-	return 'Recipes - Local first?'
+	return bottle.static_file('index.html', root=os.path.join(ROOT_DIR, 'static'))
+
+@app.route("/static/js/<filepath:path>", method='GET')
+def js(filepath):
+	return bottle.static_file(filepath, root=os.path.join(ROOT_DIR, 'static/js'))
 
 if __name__ == "__main__":
 	from flup.server.fcgi import WSGIServer
