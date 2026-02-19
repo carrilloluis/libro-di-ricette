@@ -3,7 +3,6 @@ import sqlite3
 import json
 import bottle
 import uuid
-import re
 from contextlib import closing
 
 @app.route('/Recipe/v1/<idx:re:[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}>/', method='GET')
